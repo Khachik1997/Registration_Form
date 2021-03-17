@@ -1,5 +1,5 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "registration",);
+$connect = mysqli_connect("localhost", "root", "", "dashboard");
 session_start();
 if (isset($_SESSION["email"])) {
     header("location:index.php");
@@ -9,10 +9,10 @@ if (isset($_POST["register"])) {
         echo '<script>alert("All fields are required")</script>';
     } else {
         $user_name = mysqli_real_escape_string($connect, $_POST["user_name"]);
-        $user_email = mysqli_real_escape_string($connect, $_POST["user_email"]);
-        $user_password = mysqli_real_escape_string($connect, $_POST["user_password"]);
+        $user_email = $_POST["user_email"];
+        $user_password =  $_POST["user_password"];
         $user_password = md5($user_password);
-        $query = "SELECT * FROM users where email='$user_email'";
+        $query = "SELECT email FROM users where email='$user_email'";
         $duplicate = mysqli_query($connect, $query);
         if (mysqli_num_rows($duplicate) > 0) {
             echo '<script>alert("that email address already has been used ")</script>';
@@ -31,10 +31,10 @@ if (isset($_POST["login"])) {
     if (empty($_POST["user_email"]) || empty($_POST["user_password"])) {
         echo '<script>alert("All fields are required")</script>';
     } else {
-        $user_email = mysqli_real_escape_string($connect, $_POST["user_email"]);
-        $user_password = mysqli_real_escape_string($connect, $_POST["user_password"]);
+        $user_email =  $_POST["user_email"];
+        $user_password =  $_POST["user_password"];
         $user_password = md5($user_password);
-        $query = "SELECT * FROM users WHERE email = '$user_email' AND pass ='$user_password'";
+        $query = "SELECT email FROM users WHERE email = '$user_email' AND pass ='$user_password'";
         $result = mysqli_query($connect, $query);
         if (mysqli_num_rows($result) > 0) {
             $_SESSION['email'] = $user_email;
