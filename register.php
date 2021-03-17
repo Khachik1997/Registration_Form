@@ -1,50 +1,6 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "dashboard");
 session_start();
-if (isset($_SESSION["email"])) {
-    header("location:index.php");
-}
-if (isset($_POST["register"])) {
-    if (empty($_POST["user_name"]) || empty($_POST["user_email"]) || empty($_POST["user_password"])) {
-        echo '<script>alert("All fields are required")</script>';
-    } else {
-        $user_name = mysqli_real_escape_string($connect, $_POST["user_name"]);
-        $user_email = $_POST["user_email"];
-        $user_password =  $_POST["user_password"];
-        $user_password = md5($user_password);
-        $query = "SELECT email FROM users where email='$user_email'";
-        $duplicate = mysqli_query($connect, $query);
-        if (mysqli_num_rows($duplicate) > 0) {
-            echo '<script>alert("that email address already has been used ")</script>';
-        } else {
 
-            $query = "INSERT INTO users (name,email,pass ) VALUES('$user_name','$user_email','$user_password') ";
-            if (mysqli_query($connect, $query)) {
-
-                header("location:register.php?action=login");
-                echo '<script>alert("REGISTRATION DONE")</script>';
-            }
-        }
-    }
-}
-if (isset($_POST["login"])) {
-    if (empty($_POST["user_email"]) || empty($_POST["user_password"])) {
-        echo '<script>alert("All fields are required")</script>';
-    } else {
-        $user_email =  $_POST["user_email"];
-        $user_password =  $_POST["user_password"];
-        $user_password = md5($user_password);
-        $query = "SELECT email FROM users WHERE email = '$user_email' AND pass ='$user_password'";
-        $result = mysqli_query($connect, $query);
-        if (mysqli_num_rows($result) > 0) {
-            $_SESSION['email'] = $user_email;
-            header("location:index.php");
-        } else {
-            echo '<script>alert("Wrong USer Details")</script>';
-
-        }
-    }
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,7 +18,7 @@ if (isset($_POST["login"])) {
 if (isset($_GET["action"]) == "login") {
     ?>
     <h2 style="text-align:center">Login</h2>
-    <form style="width: 50%; transform: translateX(50%)" method="post">
+    <form style="width: 50%; transform: translateX(50%)" method="post" action="register_config.php">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -74,7 +30,15 @@ if (isset($_GET["action"]) == "login") {
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                    name="user_password">
         </div>
+        <p style="color: red">
+            <?php
+            if(isset($_SESSION["error"]) )
+            {
+                echo $_SESSION["error"];
+            }
+            ?>
 
+        </p>
         <button type="submit" class="btn btn-primary" value="Login" name="login">Login</button>
         <p style="text-align:center"><a href="register.php">Register</a></p>
     </form>
@@ -82,7 +46,7 @@ if (isset($_GET["action"]) == "login") {
 } else {
     ?>
     <h2 style="text-align: center">Registration</h2>
-    <form style="width: 50%; transform: translate(50%,0) " method="post">
+    <form style="width: 50%; transform: translate(50%,0) " method="post" action="register_config.php">
         <div class="form-group">
             <label for="username">Enter Name</label>
             <input type="text" class="form-control" id="username" aria-describedby="username"
@@ -99,7 +63,15 @@ if (isset($_GET["action"]) == "login") {
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                    name="user_password">
         </div>
+        <p style="color: red">
+            <?php
+            if(isset($_SESSION["error"]) )
+            {
+                echo $_SESSION["error"];
+            }
+            ?>
 
+        </p>
         <button type="submit" class="btn btn-primary" value="Register" name="register">Register</button>
         <p style="text-align:center"><a href="register.php?action=login">Login</a></p>
     </form>
