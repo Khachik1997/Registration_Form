@@ -1,0 +1,26 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin-top: 50px;
+    background-color: #e5ece4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    display: inline-block;
+}
+.welcome{
+    display:flex;
+    align-items: center;
+}
+.welcome a{
+    margin-left: 20px;
+}
+.form-group{
+    margin-top: 25px;
+    width: 100%;
+}

@@ -1,7 +1,8 @@
 <?php
 session_start();
-
+include "func_flash.php";
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,10 +33,7 @@ if (isset($_GET["action"]) == "login") {
         </div>
         <p style="color: red">
             <?php
-            if(isset($_SESSION["error"]) )
-            {
-                echo $_SESSION["error"];
-            }
+                getFlash("error");
             ?>
 
         </p>
@@ -65,10 +63,7 @@ if (isset($_GET["action"]) == "login") {
         </div>
         <p style="color: red">
             <?php
-            if(isset($_SESSION["error"]))
-            {
-                echo $_SESSION["error"];
-            }
+            getFlash("error");
             ?>
 
         </p>
@@ -83,10 +78,9 @@ if (isset($_GET["action"]) == "login") {
 <div class="comment_area" style="width: 50%;margin: auto">
     <?php
     require "comments.php";
-    while ($row = mysqli_fetch_array($comments)) {
+    while ($row = mysqli_fetch_assoc($comments)) {
         echo "<tr>";
-        echo "<th>" . $row['id'] . "</th>";
-        echo "<td>" . $row['username'] . "</td>";
+        echo "<td>" . $row['name'] . "</td>";
         echo "<td>" . $row['comment'] . "</td>";
         echo "<td>" . $row['created_at'] . "</td>";
         echo "</tr>";

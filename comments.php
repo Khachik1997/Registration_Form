@@ -7,13 +7,14 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$query = "SELECT * FROM comments";
+$query = "SELECT users.name,comments.comment,comments.created_at FROM users INNER JOIN comments ON users.id = comments.user_id ";
 $comments = mysqli_query($connection, $query);
 
 if (!$comments) {
     die("Error: " . $query . "<br>" . mysqli_error($connection));
 }
 mysqli_close($connection);
+
 ?>
 
 <!doctype html>
@@ -27,7 +28,7 @@ mysqli_close($connection);
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>My first Task</title>
 </head>
-<body>
+<body style="background-color: #e5ece4">
 
 <table class="table">
     <thead>
@@ -39,9 +40,10 @@ mysqli_close($connection);
     </thead>
     <tbody>
     <?php
-        while($row = mysqli_fetch_array($comments)) {
+
+        while($row = mysqli_fetch_assoc($comments)) {
             echo "<tr>";
-            echo "<td>" . $row['username'] . "</td>";
+            echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['comment'] . "</td>";
             echo "<td>" . $row['created_at'] . "</td>";
             echo "</tr>";
