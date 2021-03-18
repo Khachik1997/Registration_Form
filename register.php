@@ -39,7 +39,7 @@ if (isset($_GET["action"]) == "login") {
             ?>
 
         </p>
-        <button type="submit" class="btn btn-primary" value="Login" name="login">Login</button>
+        <input type="submit" class="btn btn-primary" value="Login" name="login">
         <p style="text-align:center"><a href="register.php">Register</a></p>
     </form>
     <?php
@@ -65,14 +65,14 @@ if (isset($_GET["action"]) == "login") {
         </div>
         <p style="color: red">
             <?php
-            if(isset($_SESSION["error"]) )
+            if(isset($_SESSION["error"]))
             {
                 echo $_SESSION["error"];
             }
             ?>
 
         </p>
-        <button type="submit" class="btn btn-primary" value="Register" name="register">Register</button>
+        <input type="submit" class="btn btn-primary" value="Register" name="register">
         <p style="text-align:center"><a href="register.php?action=login">Login</a></p>
     </form>
     <?php
@@ -94,10 +94,7 @@ if (isset($_GET["action"]) == "login") {
     ?>
 
 </div>
-<table class="table" style="width: 50%">
 
-
-</table>
 </body>
 </html>
 
