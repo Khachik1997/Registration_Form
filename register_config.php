@@ -1,8 +1,8 @@
 <?php
 session_start();
 include "func_flash.php";
-$connect = mysqli_connect("localhost", "root", "", "dashboard");
-
+require "db_config.php";
+$connect = mysqli_connect($hostname, $db_username, $db_password, $db_name);
 if (isset($_SESSION["id"])) {
 
     header("location:index.php");
