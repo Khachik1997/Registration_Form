@@ -74,21 +74,28 @@ if (isset($_GET["action"]) == "login") {
 }
 ?>
 <h4 style="text-align:center">If you want to add comment,first you mast login </h4>
+<table class="table" style="width: 50%;margin: auto">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php
+        include "connection_config.php";
+        while ($row = mysqli_fetch_assoc($comments)) {
+            echo "<tr>";
+            echo "<td>" . $row['name'] . "</td>";
+            echo "<td>" . $row['comment'] . "</td>";
+            echo "<td>" . $row['created_at'] . "</td>";
+            echo "</tr>";
+        }
+        ?>
 
-<div class="comment_area" style="width: 50%;margin: auto">
-    <?php
-    require "comments.php";
-    while ($row = mysqli_fetch_assoc($comments)) {
-        echo "<tr>";
-        echo "<td>" . $row['name'] . "</td>";
-        echo "<td>" . $row['comment'] . "</td>";
-        echo "<td>" . $row['created_at'] . "</td>";
-        echo "</tr>";
-    }
-    ?>
-
-</div>
-
+    </tbody>
+</table>
 </body>
 </html>
 

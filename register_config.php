@@ -40,7 +40,6 @@ if (isset($_POST["login"])) {
         setFlash("error","All fields are required");
         header("location:register.php?action=login");
     } else {
-
         $user_email =  $_POST["user_email"];
         $user_password =  $_POST["user_password"];
         $user_password = md5($user_password);

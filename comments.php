@@ -1,19 +1,7 @@
 <?php
-require "db_config.php";
+include "connection_config.php";
 
-$connection =  mysqli_connect($hostname, $db_username, $db_password, $db_name);
-
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$query = "SELECT users.name,comments.comment,comments.created_at FROM users INNER JOIN comments ON users.id = comments.user_id ";
-$comments = mysqli_query($connection, $query);
-
-if (!$comments) {
-    die("Error: " . $query . "<br>" . mysqli_error($connection));
-}
-mysqli_close($connection);
+session_start();
 
 ?>
 
@@ -36,16 +24,24 @@ mysqli_close($connection);
         <th scope="col">Username</th>
         <th scope="col">Comment</th>
         <th scope="col">Created At</th>
+        <?php
+        if(isset($_SESSION['id'])){
+          ' <th scope="col">Edit</th>';
+        }
+        ?>
+
     </tr>
     </thead>
     <tbody>
     <?php
-
         while($row = mysqli_fetch_assoc($comments)) {
             echo "<tr>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['comment'] . "</td>";
             echo "<td>" . $row['created_at'] . "</td>";
+            if(isset($_SESSION['id']) && $_SESSION['id'] == $row['user_id']){
+                echo "<td><a  class='btn btn btn-primary' href='edit_com.php?id=". $row['id'] ."'  >Edit</a> </td>";
+            }
             echo "</tr>";
         }
     ?>
