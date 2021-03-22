@@ -6,10 +6,7 @@ if (!isset($_SESSION["id"])) {
     header("location:comments.php");
 
 }
-if (!isset( $_POST['edit_com'])){
-    header("location:comments.php");
 
-}
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
