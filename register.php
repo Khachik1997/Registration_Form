@@ -34,7 +34,7 @@ if (isset($_GET["action"]) == "login") {
         </div>
         <p style="color: red">
             <?php
-                getFlash("error");
+            getFlash("error");
             ?>
 
         </p>
@@ -84,17 +84,16 @@ if (isset($_GET["action"]) == "login") {
     </tr>
     </thead>
     <tbody>
-        <?php
-        include "connection_config.php";
-        while ($row = mysqli_fetch_assoc($comments)) {
-            echo "<tr>";
-            echo "<td>" . $row['name'] . "</td>";
-            echo "<td>" . $row['comment'] . "</td>";
-            echo "<td>" . $row['created_at'] . "</td>";
-            echo "</tr>";
-        }
-        ?>
-
+    <?php
+    include "connection_config.php";
+    while ($row = mysqli_fetch_assoc($comments)) {
+    ?>
+    <tr>
+        <td><?= $row['name'] ?></td>
+        <td><?= $row['comment'] ?></td>
+        <td><?= $row['created_at'] ?></td>
+    </tr>
+      <?php } ?>
     </tbody>
 </table>
 </body>
