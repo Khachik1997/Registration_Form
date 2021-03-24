@@ -4,7 +4,38 @@
     box-sizing: border-box;
 }
 
-section.main {
+body {
+    background-color: #e5ece4;
+}
+
+section.header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.search {
+    margin: 20px;
+    padding: 15px;
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bolder;
+    border-radius: 15px;
+}
+
+.weather p {
+    margin: 20px;
+    padding: 15px;
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bolder;
+    border-radius: 15px;
+
+}
+
+
+#main {
     display: flex;
     flex-direction: row;
     margin-top: 25px;
@@ -16,20 +47,30 @@ section.main {
     text-align: center;
     margin-bottom: 20px;
 }
-.comment_area{
+
+.comment_area {
     min-width: 50%;
 }
-.comment_area table{
+
+.comment_area table {
     border-collapse: collapse;
     width: 100%;
 }
-.comment_area table td,.comment_area table th{
+
+.comment_area table td, .comment_area table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
-.comment_area table tr:nth-child(even){background-color: #f2f2f2;}
-.comment_area table tr:hover {background-color: #ddd;}
-.comment_area table th{
+
+.comment_area table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.comment_area table tr:hover {
+    background-color: #ddd;
+}
+
+.comment_area table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -37,10 +78,21 @@ section.main {
     color: white;
 
 }
-.comment_area table  a{
+
+.comment_area table a {
     text-decoration: none;
     color: black;
 }
-.comment_area table  a:hover {
-    color:  #4CAF50;
+
+.comment_area table a:hover {
+    color: #4CAF50;
+}
+
+.tr {
+    color: blue;
+    margin: 20px;
+}
+.td{
+    border: 1px solid #ddd;
+    padding: 10px;
 }

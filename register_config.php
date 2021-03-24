@@ -23,7 +23,7 @@ if (isset($_POST["register"])) {
         $user_password = md5($user_password);
         $query = "SELECT email FROM users where email='$user_email'";
         $duplicate = mysqli_query($connect, $query);
-        var_dump($duplicate);
+
         if (mysqli_num_rows($duplicate) > 0) {
             setFlash("error","That email is already in use");
             header("location:register.php");
