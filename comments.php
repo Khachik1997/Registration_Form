@@ -1,8 +1,8 @@
 <?php
 include "connection_config.php";
-
+include "func_flash.php";
 session_start();
-$temp = $_SESSION['temp']
+
 ?>
 
 <!doctype html>
@@ -16,33 +16,12 @@ $temp = $_SESSION['temp']
     <title>My first Task</title>
 </head>
 <body style="background-color: #e5ece4">
+<div class="weather">
+    <p> Temperature in Yerevan <?= getWeather(); ?>  </p>
+</div>
 <section class="main">
 
-    <div class="weather">
-        <h3>Weather in Your Citi </h3>
-        <p>Please write your citi name for see temperature in your citi also you can choose celsius or fahrenheit</p>
-        <form action="cURL.php" method="post">
-            <div class="input_citi">
-                <span>Citi Name</span><input type="text" placeholder="Yerevan" name="citi_name">
-            </div>
-            <div class="temp_citi">
-                <div class="celsius">
-                    <input type="radio" id ="celsius" name="tempType" value="metric" checked>
-                    <label for="celsius">Celsius</label>
-                </div>
-                <div class="fahrenheit">
-                    <input type="radio" id ="fahrenheit" name="tempType" value="imperial">
-                    <label for="fahrenheit">Fahrenheit</label>
-                </div>
-            </div>
-            <button type="submit">See Result</button>
-            <form/>
-            <div class="number_for_temp">
-                <p>Temperature</p>
-                <span class="temp"><?= $temp ?></span>
-                <span style="color: red"></span>
-            </div>
-    </div>
+
     <div class="comment_area">
         <h3> There You can see comments</h3>
         <table class="table">
