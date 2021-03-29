@@ -1,0 +1,7 @@
+{
+    "name": "test/test1",
+    "description": "sdas",
+    "require": {
+        "robmorgan/phinx": "^0.12.6"
+    }
+}
