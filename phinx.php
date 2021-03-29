@@ -12,7 +12,7 @@ return
         'production' => [
             'adapter' => 'mysql',
             'host' => 'localhost',
-            'name' => 'dashboard',
+            'name' => 'production_db',
             'user' => 'root',
             'pass' => '',
             'port' => '3306',

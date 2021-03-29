@@ -1,6 +1,6 @@
 {
     "name": "test/test1",
-    "description": "sdas",
+	"description":"Sdsd",
     "require": {
         "robmorgan/phinx": "^0.12.6"
     }
