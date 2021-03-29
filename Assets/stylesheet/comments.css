@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+
+}
 
 body {
     background-color: #e5ece4;
@@ -96,3 +99,4 @@ section.header {
     border: 1px solid #ddd;
     padding: 10px;
 }
+

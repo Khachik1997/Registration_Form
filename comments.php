@@ -18,14 +18,14 @@ session_start();
 
 </head>
 <body>
+
 <section class="header">
     <div class="weather">
         <p> Temperature in Yerevan <?= getWeather(); ?> C </p>
     </div>
     <div class="search">
-        <label for="search_input">Comment</label>
+        <label class="label_for_search" for="search_input">Search Comment</label>
         <input type="text" id="search_input">
-        <button id="search_btn"> Search</button>
 
     </div>
 </section>
@@ -69,50 +69,49 @@ session_start();
 <script>
 
     function myFunction(data) {
+        // console.log(data)
         $('#tbody').empty();
-        if(data == "Error"){
-            $('#tbody').append("Not Result");
-            return;
-        }
-        let response = JSON.parse(data);
-        console.log(response);
-        for (let i = 0; i < response.length; ++i) {
-            let user_id = response[i].user_id;
-            let comment = response[i].comment
-            let created_at = response[i].created_at
-
-
-            let result = "<tr class='tr'>" +
-                "<td class='td'>" + user_id + "</td>" +
-                "<td class='td'>" + comment + "</td>" +
-                "<td class='td'>" + created_at + "</td>" +
-                "</tr>";
-            $('#tbody').append(result);
+        if (data.error) {
+            $('#tbody').append(data.message);
+        } else {
+            // console.log(">>>DATA :", data["message"])
+            $.each(data["message"], function (key, value) {
+                let result = "<tr class='tr'>" +
+                    "<td class='td'>" + value[0].name + "</td>" +
+                    "<td class='td'>" + value[0].comment + "</td>" +
+                    "<td class='td'>" + value[0].created_at + "</td>" +
+                    "</tr>";
+                $('#tbody').append(result);
+            })
         }
     }
 
-    $(document).ready(function () {
-        $('#search_btn').click(function () {
-            let searching_txt = $("#search_input").val();
-            if(searching_txt.length >= 3){
-
-                $.ajax({
+    let delay_search;
+    $('#search_input').keypress(function () {
+        let searching_txt = $("#search_input").val();
+        if (searching_txt.length > 1) {
+            delay_search = setTimeout(() => {
+                let x = $.ajax({
                     url: 'search_com.php',
                     type: 'POST',
                     data: {txt: searching_txt},
-                    datatype: 'JSON',
+                    dataType: 'json',
                     success: myFunction
                 });
-            }else{
-                $('#tbody').empty();
-                $('#tbody').append("You must search 3 or more symbol");
+            }, 300);
+            $('#search_input').on('keypress', function () {
+            }).on('keydown', function (e) {
+                clearTimeout(delay_search)
+                if (e.keyCode === 8) {
+                    $('element').trigger('keypress');
+                }
+            });
+        } else {
+            $('#tbody').empty();
+            $('#tbody').append("You must search 3 or more symbol");
 
-            }
-        });
-
+        }
     });
-
-
 </script>
 </body>
 </html>
