@@ -2,6 +2,7 @@
     "name": "test/test1",
 	"description":"Sdsd",
     "require": {
-        "robmorgan/phinx": "^0.12.6"
+        "robmorgan/phinx": "^0.12.6",
+        "fzaninotto/faker": "^1.9"
     }
 }

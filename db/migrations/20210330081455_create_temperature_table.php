@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateUsersTable extends AbstractMigration
+final class CreateTemperatureTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -18,13 +18,10 @@ final class CreateUsersTable extends AbstractMigration
      */
     public function change(): void
     {
-		  // create the table
-        $table = $this->table('users');
-        $table->addColumn('name', 'string',['limit' => 30])
-			->addColumn('email', 'string',['limit' => 100])
-			->addColumn('pass', 'string',['limit' => 32])
+	$table = $this->table('comments');
+        $table->addColumn('user_id', 'integer')
+			->addColumn('comment', 'text')
+			->addColumn('created_at', 'timestamp')
             ->create();
     }
-	
-	
 }
